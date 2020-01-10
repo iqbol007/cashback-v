@@ -9,28 +9,28 @@ const SPECIAL= 'special';
 let cashback = 0;
     let purchases = 
     [
-         {sum:2341,category:REGULAR},
-         {sum:3121,category:INCREACED},
-         {sum:981,category:SPECIAL}
+         {sum:23401,category:REGULAR},
+         {sum:31821,category:INCREACED},
+         {sum:19831,category:SPECIAL}
     ];    
 function cash(purchases,i) 
 {
     if (purchases[i].category===REGULAR) 
-    {   cashback = purchases [i].sum * regularPerchasesPercent;
+    {   cashback = (purchases [i].sum/100) * regularPerchasesPercent;
         if (cashback>cashbackLimit) {
             return cashbackLimit;
         }
         else return cashback; 
     }else if(purchases[i].category===INCREACED)
     {
-        cashback =  purchases[i].sum*increasedPurchasesPercent;
+        cashback =  (purchases[i].sum/100)*increasedPurchasesPercent;
         if (cashback>cashbackLimit) {
             return cashbackLimit;
         }
         else return cashback; 
     }else if(purchases[i].category===SPECIAL)
     {
-        cashback =  purchases[i].sum * specialPurchasesPercent;
+        cashback =  (purchases[i].sum/100) * specialPurchasesPercent;
         if (cashback>cashbackLimit) {
             return cashbackLimit;
         }
