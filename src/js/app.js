@@ -1,44 +1,58 @@
 
-const regularPerchasesPercent =  1;
+const simplePerchasesPercent =  1;
 const increasedPurchasesPercent =  5;
 const specialPurchasesPercent = 30;
 const cashbackLimit = 3000;
-const REGULAR = `regular`;
+const SIMPLE = `simple`;
 const INCREACED = 'increaced';
 const SPECIAL= 'special';
-let cashback = 0;
-    let purchases = 
-    [
-         {sum:23401,category:REGULAR},
-         {sum:31821,category:INCREACED},
-         {sum:19831,category:SPECIAL}
-    ];    
-function cash(purchases,i) 
-{
-    if (purchases[i].category===REGULAR) 
-    {   cashback = (purchases [i].sum/100) * regularPerchasesPercent;
-        if (cashback>cashbackLimit) {
-            return cashbackLimit;
-        }
-        else return cashback; 
-    }else if(purchases[i].category===INCREACED)
-    {
-        cashback =  (purchases[i].sum/100)*increasedPurchasesPercent;
-        if (cashback>cashbackLimit) {
-            return cashbackLimit;
-        }
-        else return cashback; 
-    }else if(purchases[i].category===SPECIAL)
-    {
-        cashback =  (purchases[i].sum/100) * specialPurchasesPercent;
-        if (cashback>cashbackLimit) {
-            return cashbackLimit;
-        }
-        else return cashback; 
+let cashback = 0;      
+    const purchases = [
+        {
+            sum: 12,
+            category: SIMPLE
+        },
+        {
+            sum: 15,
+            category: INCREACED
+        },
+        {
+            sum: 200,
+            category: SIMPLE
+        },
+        {
+            sum: 1030,
+            category: SPECIAL
+        },
+    ];
+    
+    function takePercent(sum, percent){
+        let answer = sum * percent / 100;
+        return answer;
     }
-    else return 0;
-}
+    let predictCashback = 0;
+    
+    for(const purchase of purchases){
+        if(purchase.category == SIMPLE){
+            predictCashback += takePercent(purchase.sum, simplePerchasesPercent);
+        } else if(purchase.category == INCREACED){
+            predictCashback += takePercent(purchase.sum, increasedPurchasesPercent);
+        } else if(purchase.category == SPECIAL){
+            predictCashback += takePercent(purchase.sum, specialPurchasesPercent);
+        }
+        
+    }
+    
+    if(predictCashback > cashbackLimit){
+        predictCashback = cashbackLimit;
+    }
+    
+    cashback = predictCashback;
+    console.log(cashback);
+     
+ 
+   
+ 
 
-for (let i = 0; i < purchases.length; i++) {
-    console.log(cash(purchases,i));   
-}
+ 
+    
